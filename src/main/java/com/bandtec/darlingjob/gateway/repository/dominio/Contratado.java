@@ -1,65 +1,93 @@
 package com.bandtec.darlingjob.gateway.repository.dominio;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
 public class Contratado {
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @JsonProperty("id_contratado")
     @Column(name = "id_contratado")
     private Integer idContratado;
+
+    @JsonProperty("email")
+    @Column(name = "email")
     private String email;
+
+    @JsonProperty("nome")
+    @Column(name = "nome")
     private String nome;
+
+    @JsonProperty("cpf")
+    @Column(name = "cpf")
     private String cpf;
+
+    @JsonProperty("rg")
+    @Column(name = "rg")
     private String rg;
+
+    @JsonProperty("genero")
+    @Column(name = "genero")
     private String genero;
 
+    @JsonProperty("data_nascimento")
     @Column(name = "data_nascimento")
     private String dataNascimento;
 
+    @JsonProperty("telefone_fixo")
     @Column(name = "telefone_fixo")
     private String telefoneFixo;
 
+    @JsonProperty("telefone_celular")
     @Column(name = "telefone_celular")
     private String telefoneCelular;
     private String senha;
 
+    @JsonProperty("tipo_servico")
     @Column(name = "tipo_servico")
     private String tipoServico;
 
+    @JsonProperty("dias_disponiveis")
     @Column(name = "dias_disponiveis")
     private String diasDisponiveis;
 
+    @JsonProperty("trabalha_feriados")
     @Column(name = "trabalha_feriados")
     private String trabalhaFeriados;
 
+    @JsonProperty("horario_inicio")
     @Column(name = "horario_inicio")
     private String horarioInicio;
 
+    @JsonProperty("horario_fim")
     @Column(name = "horario_fim")
     private String horarioFim;
 
+    @JsonProperty("horario_feriado_inicio")
     @Column(name = "horario_feriado_inicio")
     private String horarioFeriadoInicio;
 
+    @JsonProperty("horario_feriado_fim")
     @Column(name = "horario_feriado_fim")
     private String horarioFeriadoFim;
 
+    @JsonProperty("is_logado")
     @Column(name = "is_logado")
-    private Boolean isLogado = false;
+    public Boolean isLogado = false;
 
+    @JsonProperty("media_feedback")
     @Column(name = "media_feedback")
     private Integer mediaFeedback = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "id_endereco")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
     public Contratado() {
 
     }
-
 
     public Contratado(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String senha, String tipoServico, String diasDisponiveis, String trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
         this.idContratado = idContratado;
@@ -102,68 +130,12 @@ public class Contratado {
         this.endereco = endereco;
     }
 
-    public String getTrabalhaFeriados() {
-        return trabalhaFeriados;
-    }
-
-    public void setTrabalhaFeriados(String trabalhaFeriados) {
-        this.trabalhaFeriados = trabalhaFeriados;
-    }
-
-    public String getHorarioFim() {
-        return horarioFim;
-    }
-
-    public void setHorarioFim(String horarioFim) {
-        this.horarioFim = horarioFim;
-    }
-
-    public String getHorarioFeriadoInicio() {
-        return horarioFeriadoInicio;
-    }
-
-    public void setHorarioFeriadoInicio(String horarioFeriadoInicio) {
-        this.horarioFeriadoInicio = horarioFeriadoInicio;
-    }
-
-    public String getHorarioFeriadoFim() {
-        return horarioFeriadoFim;
-    }
-
-    public void setHorarioFeriadoFim(String horarioFeriadoFim) {
-        this.horarioFeriadoFim = horarioFeriadoFim;
-    }
-
     public Integer getIdContratado() {
         return idContratado;
     }
 
     public void setIdContratado(Integer idContratado) {
         this.idContratado = idContratado;
-    }
-
-    public String getTipoServico() {
-        return tipoServico;
-    }
-
-    public void setTipoServico(String tipoServico) {
-        this.tipoServico = tipoServico;
-    }
-
-    public String getDiasDisponiveis() {
-        return diasDisponiveis;
-    }
-
-    public void setDiasDisponiveis(String diasDisponiveis) {
-        this.diasDisponiveis = diasDisponiveis;
-    }
-
-    public String getHorarioInicio() {
-        return horarioInicio;
-    }
-
-    public void setHorarioInicio(String horarioInicio) {
-        this.horarioInicio = horarioInicio;
     }
 
     public String getEmail() {
@@ -238,6 +210,62 @@ public class Contratado {
         this.senha = senha;
     }
 
+    public String getTipoServico() {
+        return tipoServico;
+    }
+
+    public void setTipoServico(String tipoServico) {
+        this.tipoServico = tipoServico;
+    }
+
+    public String getDiasDisponiveis() {
+        return diasDisponiveis;
+    }
+
+    public void setDiasDisponiveis(String diasDisponiveis) {
+        this.diasDisponiveis = diasDisponiveis;
+    }
+
+    public String getTrabalhaFeriados() {
+        return trabalhaFeriados;
+    }
+
+    public void setTrabalhaFeriados(String trabalhaFeriados) {
+        this.trabalhaFeriados = trabalhaFeriados;
+    }
+
+    public String getHorarioInicio() {
+        return horarioInicio;
+    }
+
+    public void setHorarioInicio(String horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public String getHorarioFim() {
+        return horarioFim;
+    }
+
+    public void setHorarioFim(String horarioFim) {
+        this.horarioFim = horarioFim;
+    }
+
+    public String getHorarioFeriadoInicio() {
+        return horarioFeriadoInicio;
+    }
+
+    public void setHorarioFeriadoInicio(String horarioFeriadoInicio) {
+        this.horarioFeriadoInicio = horarioFeriadoInicio;
+    }
+
+    public String getHorarioFeriadoFim() {
+        return horarioFeriadoFim;
+    }
+
+    public void setHorarioFeriadoFim(String horarioFeriadoFim) {
+        this.horarioFeriadoFim = horarioFeriadoFim;
+    }
+
     public Boolean getLogado() {
         return isLogado;
     }
@@ -256,6 +284,10 @@ public class Contratado {
 
     public Endereco getEndereco() {
         return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
 

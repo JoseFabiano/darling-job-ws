@@ -1,10 +1,9 @@
 package com.bandtec.darlingjob.gateway.controller;
 
+import com.bandtec.darlingjob.dto.ContratadoResponseDTO;
 import com.bandtec.darlingjob.dto.LoginRequestDTO;
 import com.bandtec.darlingjob.dto.LoginResponseDTO;
 import com.bandtec.darlingjob.service.contratado.ContratadoService;
-import com.bandtec.darlingjob.utils.*;
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
 import com.bandtec.darlingjob.dto.ContratadoRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +28,16 @@ public class ContratadoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createContratado(@RequestBody ContratadoRequestDTO novoContratado) {
-        return ResponseEntity.ok(contratadoService.postContratado(novoContratado));
+    public ResponseEntity<ContratadoResponseDTO> createContratado(
+            @RequestBody ContratadoRequestDTO novoContratado
+    ) {
+        return ResponseEntity.ok(contratadoService.createContratado(novoContratado));
     }
 
     @GetMapping("/buscar-nome/{nome}")
-    public ResponseEntity<List<Contratado>> getContratadoByNome(@PathVariable String nome) {
+    public ResponseEntity<List<ContratadoResponseDTO>> getContratadoByNome(@PathVariable String nome) {
 
-        List<Contratado> listContratado = contratadoService.getByNome(nome);
+        List<ContratadoResponseDTO> listContratado = contratadoService.getByNome(nome);
 
         if (listContratado.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -46,47 +47,29 @@ public class ContratadoController {
     }
 
     @GetMapping("/buscar-servico/{tipoServico}")
-    public ResponseEntity<List<Contratado>> getContratatosByTipoServico(@PathVariable String tipoServico) {
+    public ResponseEntity<List<ContratadoResponseDTO>> getContratatosByTipoServico(@PathVariable String tipoServico) {
 
-        List<Contratado> contratados = contratadoService.getContratatosByTipoServico(tipoServico);
+        List<ContratadoResponseDTO> listContratado = contratadoService.getContratatosByTipoServico(tipoServico);
 
-        List<Contratado> contratadosExibir = new ArrayList<>();
-        FilaObj<Contratado> filaObj = new FilaObj<>(contratados.size());
-
-        for (Contratado contratado : contratados) {
-            filaObj.add(contratado);
-        }
-
-        if (filaObj.isEmpty()) {
-            return ResponseEntity.status(204).build();
+        if (listContratado.isEmpty()) {
+            return ResponseEntity.noContent().build();
         } else {
-            while (!filaObj.isEmpty()) {
-                contratadosExibir.add(filaObj.poll());
-            }
+            return ResponseEntity.ok(listContratado);
         }
 
-        return ResponseEntity.status(200).body(contratadosExibir);
     }
 
     @GetMapping
-    public ResponseEntity<List<Contratado>> getListContratado() {
-        List<Contratado> contratados = contratadoService.getListContratado();
+    public ResponseEntity<List<ContratadoResponseDTO>> getListContratado() {
 
-        List<Contratado> contratadoResultado = new ArrayList<>();
-        FilaObj<Contratado> filaObj = new FilaObj(contratados.size());
-
-        for (Contratado contratado : contratados) {
-            filaObj.add(contratado);
-        }
-        for (int i = 0; i < contratados.size(); i++) {
-            contratadoResultado.add((Contratado) filaObj.poll());
-        }
+        List<ContratadoResponseDTO> contratados = contratadoService.getContratados();
 
         if (contratados.isEmpty()) {
-            return ResponseEntity.status(204).build();
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(contratados);
         }
 
-        return ResponseEntity.status(200).body(contratadoResultado);
     }
 
 //    @GetMapping("/{idContratado}")

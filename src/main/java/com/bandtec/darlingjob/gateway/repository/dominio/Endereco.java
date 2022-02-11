@@ -1,5 +1,7 @@
 package com.bandtec.darlingjob.gateway.repository.dominio;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_endereco")
+    @JsonProperty("id_endereco")
     private int idEndereco;
     private String endereco;
     private String complemento;
@@ -15,7 +18,6 @@ public class Endereco {
     private String pais;
     private String estado;
     private String cidade;
-    private String cep;
 
     public Endereco() {
     }
@@ -29,7 +31,17 @@ public class Endereco {
         this.pais = pais;
         this.estado = estado;
         this.cidade = cidade;
-        this.cep = cep;
+    }
+
+    public Endereco(int idEndereco, String endereco, String complemento, Integer numero, String bairro, String pais, String estado, String cidade) {
+        this.idEndereco = idEndereco;
+        this.endereco = endereco;
+        this.complemento = endereco;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
     }
 
     public int getIdEndereco() {
