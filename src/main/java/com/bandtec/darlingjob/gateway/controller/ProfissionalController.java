@@ -1,10 +1,13 @@
 package com.bandtec.darlingjob.gateway.controller;
 
-import com.bandtec.darlingjob.dto.ContratadoResponseDTO;
+import com.bandtec.darlingjob.dto.ProfissionalResponseDTO;
 import com.bandtec.darlingjob.dto.LoginRequestDTO;
 import com.bandtec.darlingjob.dto.LoginResponseDTO;
-import com.bandtec.darlingjob.service.contratado.ContratadoService;
-import com.bandtec.darlingjob.dto.ContratadoRequestDTO;
+import com.bandtec.darlingjob.service.ListarProfissionais;
+import com.bandtec.darlingjob.service.PesquisarProfissionalByNome;
+import com.bandtec.darlingjob.service.PesquisarProfissionalByTipoServico;
+import com.bandtec.darlingjob.service.contratado.ProfissionalService;
+import com.bandtec.darlingjob.dto.ProfissionalRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,31 +16,25 @@ import java.util.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/contratado")
-public class ContratadoController {
-
-    @Autowired
-    private ContratadoService contratadoService;
+@RequestMapping("/profissional")
+public class ProfissionalController {
 
 //    @Autowired
-//    private ContratadoRepository contratadoRepository;
+//    private ProfissionalService profissionalService;
 
-    @PostMapping("/login")
-    private ResponseEntity<LoginResponseDTO> loginContratado(@RequestBody LoginRequestDTO loginRequestDTO) {
-        return ResponseEntity.of(contratadoService.autenticar(loginRequestDTO));
-    }
+    @Autowired
+    private ListarProfissionais listarProfissionais;
 
-    @PostMapping
-    public ResponseEntity<ContratadoResponseDTO> createContratado(
-            @RequestBody ContratadoRequestDTO novoContratado
-    ) {
-        return ResponseEntity.ok(contratadoService.createContratado(novoContratado));
-    }
+    @Autowired
+    private PesquisarProfissionalByNome pesquisarProfissionalByNome;
+
+    @Autowired
+    private PesquisarProfissionalByTipoServico pesquisarProfissionalByTipoServico;
 
     @GetMapping("/buscar-nome/{nome}")
-    public ResponseEntity<List<ContratadoResponseDTO>> getContratadoByNome(@PathVariable String nome) {
+    public ResponseEntity<List<ProfissionalResponseDTO>> listarProfissional(@PathVariable String nome) {
 
-        List<ContratadoResponseDTO> listContratado = contratadoService.getByNome(nome);
+        List<ProfissionalResponseDTO> listContratado = pesquisarProfissionalByNome.execute(nome);
 
         if (listContratado.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -47,9 +44,9 @@ public class ContratadoController {
     }
 
     @GetMapping("/buscar-servico/{tipoServico}")
-    public ResponseEntity<List<ContratadoResponseDTO>> getContratatosByTipoServico(@PathVariable String tipoServico) {
+    public ResponseEntity<List<ProfissionalResponseDTO>> pesquisarProfissionalByTipoServico(@PathVariable String tipoServico) {
 
-        List<ContratadoResponseDTO> listContratado = contratadoService.getContratatosByTipoServico(tipoServico);
+        List<ProfissionalResponseDTO> listContratado = pesquisarProfissionalByTipoServico.execute(tipoServico);
 
         if (listContratado.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -60,9 +57,9 @@ public class ContratadoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ContratadoResponseDTO>> getListContratado() {
+    public ResponseEntity<List<ProfissionalResponseDTO>> listarProfissionais() {
 
-        List<ContratadoResponseDTO> contratados = contratadoService.getContratados();
+        List<ProfissionalResponseDTO> contratados = listarProfissionais.execute();
 
         if (contratados.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -71,6 +68,59 @@ public class ContratadoController {
         }
 
     }
+
+//    @Autowired
+//    private ContratadoRepository contratadoRepository;
+
+//    @PostMapping("/login")
+//    private ResponseEntity<LoginResponseDTO> loginContratado(@RequestBody LoginRequestDTO loginRequestDTO) {
+//        return ResponseEntity.of(profissionalService.autenticar(loginRequestDTO));
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<ProfissionalResponseDTO> createContratado(
+//            @RequestBody ProfissionalRequestDTO novoContratado
+//    ) {
+//        return ResponseEntity.ok(profissionalService.createContratado(novoContratado));
+//    }
+//
+//    @GetMapping("/buscar-nome/{nome}")
+//    public ResponseEntity<List<ProfissionalResponseDTO>> getContratadoByNome(@PathVariable String nome) {
+//
+//        List<ProfissionalResponseDTO> listContratado = profissionalService.getByNome(nome);
+//
+//        if (listContratado.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        } else {
+//            return ResponseEntity.ok(listContratado);
+//        }
+//    }
+//
+//    @GetMapping("/buscar-servico/{tipoServico}")
+//    public ResponseEntity<List<ProfissionalResponseDTO>> getContratatosByTipoServico(@PathVariable String tipoServico) {
+//
+//        List<ProfissionalResponseDTO> listContratado = profissionalService.getContratatosByTipoServico(tipoServico);
+//
+//        if (listContratado.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        } else {
+//            return ResponseEntity.ok(listContratado);
+//        }
+//
+//    }
+//
+//    @GetMapping
+//    public ResponseEntity<List<ProfissionalResponseDTO>> getListContratado() {
+//
+//        List<ProfissionalResponseDTO> contratados = profissionalService.getContratados();
+//
+//        if (contratados.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        } else {
+//            return ResponseEntity.ok(contratados);
+//        }
+//
+//    }
 
 //    @GetMapping("/{idContratado}")
 //    public ResponseEntity<?> getContratado(@PathVariable int idContratado) {

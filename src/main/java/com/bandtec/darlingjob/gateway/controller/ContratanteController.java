@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/contratante")
 public class ContratanteController {
@@ -20,9 +21,8 @@ public class ContratanteController {
     private ContratanteRepository repository;
     private ArrayList<Contratante> contratante;
 
-    @CrossOrigin
     @GetMapping
-    public ResponseEntity getContratante() {
+    public ResponseEntity<List<Contratante>> getContratante() {
         List<Contratante> contratante = repository.findAll();
         List<Contratante> contratanteResultado = new ArrayList<>();
         FilaObj filaObj = new FilaObj(contratante.size());
@@ -42,14 +42,12 @@ public class ContratanteController {
         return ResponseEntity.status(200).body(contratanteResultado);
     }
 
-    @CrossOrigin
     @PostMapping
     public ResponseEntity postContratante(@RequestBody Contratante novoContratante) {
         repository.save(novoContratante);
         return ResponseEntity.status(201).build();
     }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity getContratante(@PathVariable int id) {
         if (repository.existsById(id)) {
@@ -59,7 +57,6 @@ public class ContratanteController {
         return ResponseEntity.status(404).build();
     }
 
-    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity deleteContratante(@PathVariable int id) {
         if (repository.existsById(id)) {
@@ -70,7 +67,6 @@ public class ContratanteController {
         return ResponseEntity.status(404).build();
     }
 
-    @CrossOrigin
     @GetMapping("/login/{email}/{senha}")
     private ResponseEntity loginContratante(@PathVariable String email, @PathVariable String senha) {
         List<Contratante> contratanteList = repository.findAll();
@@ -101,7 +97,6 @@ public class ContratanteController {
         return ResponseEntity.status(404).build();
     }
 
-    @CrossOrigin
     @GetMapping("/logado/{email}/{senha}")
     public ResponseEntity userLogado(@PathVariable String email, @PathVariable String senha){
         List<Contratante> contratanteList = repository.findAll();
@@ -114,7 +109,6 @@ public class ContratanteController {
         return ResponseEntity.status(404).build();
     }
 
-    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity updateContratante(@PathVariable int id,
                                            @RequestBody Contratante contratante) {
@@ -126,7 +120,6 @@ public class ContratanteController {
         return ResponseEntity.status(404).build();
     }
 
-    @CrossOrigin
     @PostMapping("/download")
     public ResponseEntity downloadLista() {
         ListaObj<Contratante> listaContratante = new ListaObj<Contratante>((int) repository.count());
@@ -141,7 +134,6 @@ public class ContratanteController {
         return ResponseEntity.status(200).build();
     }
 
-    @CrossOrigin
     @GetMapping("/lercsv")
     public ResponseEntity lerCsv(){
         Csv.leExibeArquivoContratante("Contratante");

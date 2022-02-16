@@ -1,6 +1,6 @@
 package com.bandtec.darlingjob.utils;
 
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
+import com.bandtec.darlingjob.gateway.repository.dominio.Profissional;
 import com.bandtec.darlingjob.gateway.repository.dominio.Contratante;
 
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Csv {
-    public static void gravaArquivoContratado (ListaObj<Contratado> lista, String nomeArq) {
+    public static void gravaArquivoContratado (ListaObj<Profissional> lista, String nomeArq) {
         FileWriter arq = null;
         Formatter saida = null;
         Boolean deuRuim = false;
@@ -29,9 +29,9 @@ public class Csv {
         }
         try {
             for (int i = 0; i < lista.getTamanho(); i++) {
-                Contratado contratado = lista.getElemento(i);
-                saida.format("%d;%s;%s;%s\n",contratado.getIdContratado(), contratado.getNome(),
-                        contratado.getEmail(), contratado.getHorarioInicio());
+                Profissional profissional = lista.getElemento(i);
+                saida.format("%d;%s;%s;%s\n", profissional.getIdContratado(), profissional.getNome(),
+                        profissional.getEmail(), profissional.getHorarioInicio());
             }
         }
         catch (FormatterClosedException erro) {

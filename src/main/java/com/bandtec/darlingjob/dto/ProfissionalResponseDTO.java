@@ -1,95 +1,35 @@
-package com.bandtec.darlingjob.gateway.repository.dominio;
+package com.bandtec.darlingjob.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.bandtec.darlingjob.gateway.repository.dominio.Profissional;
+import com.bandtec.darlingjob.gateway.repository.dominio.Endereco;
+import com.bandtec.darlingjob.gateway.repository.dominio.Usuario;
 
-import javax.persistence.*;
-
-@Entity
-public class Contratado {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @JsonProperty("id_contratado")
-    @Column(name = "id_contratado")
+public class ProfissionalResponseDTO {
     private Integer idContratado;
-
-    @JsonProperty("email")
-    @Column(name = "email")
     private String email;
-
-    @JsonProperty("nome")
-    @Column(name = "nome")
     private String nome;
-
-    @JsonProperty("cpf")
-    @Column(name = "cpf")
     private String cpf;
-
-    @JsonProperty("rg")
-    @Column(name = "rg")
     private String rg;
-
-    @JsonProperty("genero")
-    @Column(name = "genero")
     private String genero;
-
-    @JsonProperty("data_nascimento")
-    @Column(name = "data_nascimento")
     private String dataNascimento;
-
-    @JsonProperty("telefone_fixo")
-    @Column(name = "telefone_fixo")
     private String telefoneFixo;
-
-    @JsonProperty("telefone_celular")
-    @Column(name = "telefone_celular")
     private String telefoneCelular;
-    private String senha;
-
-    @JsonProperty("tipo_servico")
-    @Column(name = "tipo_servico")
     private String tipoServico;
-
-    @JsonProperty("dias_disponiveis")
-    @Column(name = "dias_disponiveis")
     private String diasDisponiveis;
-
-    @JsonProperty("trabalha_feriados")
-    @Column(name = "trabalha_feriados")
-    private String trabalhaFeriados;
-
-    @JsonProperty("horario_inicio")
-    @Column(name = "horario_inicio")
+    private Boolean trabalhaFeriados;
     private String horarioInicio;
-
-    @JsonProperty("horario_fim")
-    @Column(name = "horario_fim")
     private String horarioFim;
-
-    @JsonProperty("horario_feriado_inicio")
-    @Column(name = "horario_feriado_inicio")
     private String horarioFeriadoInicio;
-
-    @JsonProperty("horario_feriado_fim")
-    @Column(name = "horario_feriado_fim")
     private String horarioFeriadoFim;
-
-    @JsonProperty("is_logado")
-    @Column(name = "is_logado")
-    public Boolean isLogado = false;
-
-    @JsonProperty("media_feedback")
-    @Column(name = "media_feedback")
+    private Boolean isLogado = false;
     private Integer mediaFeedback = 0;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    public Contratado() {
 
+    public ProfissionalResponseDTO() {
     }
 
-    public Contratado(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String senha, String tipoServico, String diasDisponiveis, String trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
+    public ProfissionalResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, Boolean trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
         this.idContratado = idContratado;
         this.email = email;
         this.nome = nome;
@@ -99,7 +39,6 @@ public class Contratado {
         this.dataNascimento = dataNascimento;
         this.telefoneFixo = telefoneFixo;
         this.telefoneCelular = telefoneCelular;
-        this.senha = senha;
         this.tipoServico = tipoServico;
         this.diasDisponiveis = diasDisponiveis;
         this.trabalhaFeriados = trabalhaFeriados;
@@ -112,7 +51,8 @@ public class Contratado {
         this.endereco = endereco;
     }
 
-    public Contratado(String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String senha, String tipoServico, String toString, String trabFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean aBoolean, Integer integer, Endereco endereco) {
+    public ProfissionalResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, Boolean trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Endereco endereco) {
+        this.idContratado = idContratado;
         this.email = email;
         this.nome = nome;
         this.cpf = cpf;
@@ -121,13 +61,64 @@ public class Contratado {
         this.dataNascimento = dataNascimento;
         this.telefoneFixo = telefoneFixo;
         this.telefoneCelular = telefoneCelular;
-        this.senha = senha;
         this.tipoServico = tipoServico;
+        this.diasDisponiveis = diasDisponiveis;
+        this.trabalhaFeriados = trabalhaFeriados;
         this.horarioInicio = horarioInicio;
         this.horarioFim = horarioFim;
         this.horarioFeriadoInicio = horarioFeriadoInicio;
         this.horarioFeriadoFim = horarioFeriadoFim;
         this.endereco = endereco;
+    }
+
+    public static ProfissionalResponseDTO convertFromDomain(Usuario usuario) {
+
+//        if (usuario == null){
+//            return null;
+//        }
+
+        return new ProfissionalResponseDTO(
+                usuario.getIdUsuario(),
+                usuario.getEmail(),
+                usuario.getNome(),
+                usuario.getCpf(),
+                usuario.getRg(),
+                usuario.getGenero(),
+                usuario.getDataNascimento(),
+                usuario.getTelefoneFixo(),
+                usuario.getTelefoneCelular(),
+                usuario.getTipoServico(),
+                usuario.getDiasDisponiveis(),
+                usuario.getTrabalhaFeriados(),
+                usuario.getHorarioInicioDia(),
+                usuario.getHorarioFimDia(),
+                usuario.getHorarioFeriadoInicio(),
+                usuario.getHorarioFeriadoFim(),
+                usuario.getEndereco()
+        );
+    }
+    public static ProfissionalResponseDTO convertFromDomain(Profissional profissional) {
+        return new ProfissionalResponseDTO(
+                profissional.getIdContratado(),
+                profissional.getEmail(),
+                profissional.getNome(),
+                profissional.getCpf(),
+                profissional.getRg(),
+                profissional.getGenero(),
+                profissional.getDataNascimento(),
+                profissional.getTelefoneFixo(),
+                profissional.getTelefoneCelular(),
+                profissional.getTipoServico(),
+                profissional.getDiasDisponiveis(),
+                profissional.getTrabalhaFeriados(),
+                profissional.getHorarioInicio(),
+                profissional.getHorarioFim(),
+                profissional.getHorarioFeriadoInicio(),
+                profissional.getHorarioFeriadoFim(),
+                profissional.isLogado,
+                profissional.getMediaFeedback(),
+                profissional.getEndereco()
+        );
     }
 
     public Integer getIdContratado() {
@@ -202,14 +193,6 @@ public class Contratado {
         this.telefoneCelular = telefoneCelular;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getTipoServico() {
         return tipoServico;
     }
@@ -226,11 +209,11 @@ public class Contratado {
         this.diasDisponiveis = diasDisponiveis;
     }
 
-    public String getTrabalhaFeriados() {
+    public Boolean getTrabalhaFeriados() {
         return trabalhaFeriados;
     }
 
-    public void setTrabalhaFeriados(String trabalhaFeriados) {
+    public void setTrabalhaFeriados(Boolean trabalhaFeriados) {
         this.trabalhaFeriados = trabalhaFeriados;
     }
 
@@ -290,4 +273,3 @@ public class Contratado {
         this.endereco = endereco;
     }
 }
-

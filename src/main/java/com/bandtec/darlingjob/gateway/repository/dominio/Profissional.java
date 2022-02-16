@@ -1,110 +1,133 @@
-package com.bandtec.darlingjob.dto;
+package com.bandtec.darlingjob.gateway.repository.dominio;
 
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
-import com.bandtec.darlingjob.gateway.repository.dominio.Endereco;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
+import javax.persistence.*;
 
-public class ContratadoRequestDTO {
+@Entity
+public class Profissional {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @JsonProperty("id_contratado")
+    @Column(name = "id_contratado")
     private Integer idContratado;
 
     @JsonProperty("email")
+    @Column(name = "email")
     private String email;
 
     @JsonProperty("nome")
+    @Column(name = "nome")
     private String nome;
 
     @JsonProperty("cpf")
+    @Column(name = "cpf")
     private String cpf;
 
     @JsonProperty("rg")
+    @Column(name = "rg")
     private String rg;
 
     @JsonProperty("genero")
+    @Column(name = "genero")
     private String genero;
 
     @JsonProperty("data_nascimento")
+    @Column(name = "data_nascimento")
     private String dataNascimento;
 
     @JsonProperty("telefone_fixo")
+    @Column(name = "telefone_fixo")
     private String telefoneFixo;
 
     @JsonProperty("telefone_celular")
+    @Column(name = "telefone_celular")
     private String telefoneCelular;
+    private String senha;
 
     @JsonProperty("tipo_servico")
+    @Column(name = "tipo_servico")
     private String tipoServico;
 
     @JsonProperty("dias_disponiveis")
-    private List<String> diasDisponiveis;
+    @Column(name = "dias_disponiveis")
+    private String diasDisponiveis;
 
     @JsonProperty("trabalha_feriados")
-    private String trabalhaFeriados;
+    @Column(name = "trabalha_feriados")
+    private Boolean trabalhaFeriados;
 
     @JsonProperty("horario_inicio")
+    @Column(name = "horario_inicio")
     private String horarioInicio;
 
     @JsonProperty("horario_fim")
+    @Column(name = "horario_fim")
     private String horarioFim;
 
     @JsonProperty("horario_feriado_inicio")
+    @Column(name = "horario_feriado_inicio")
     private String horarioFeriadoInicio;
 
     @JsonProperty("horario_feriado_fim")
+    @Column(name = "horario_feriado_fim")
     private String horarioFeriadoFim;
 
     @JsonProperty("is_logado")
-    private Boolean isLogado = false;
+    @Column(name = "is_logado")
+    public Boolean isLogado = false;
 
     @JsonProperty("media_feedback")
+    @Column(name = "media_feedback")
     private Integer mediaFeedback = 0;
 
-    @JsonProperty("endereco")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    @JsonProperty("senha")
-    private String senha;
+    public Profissional() {
 
-    public static Contratado convertToDomain(ContratadoRequestDTO novoContratado) {
+    }
 
-        StringBuilder qtdDiasDisponiveis = new StringBuilder();
+    public Profissional(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String senha, String tipoServico, String diasDisponiveis, Boolean trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
+        this.idContratado = idContratado;
+        this.email = email;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.genero = genero;
+        this.dataNascimento = dataNascimento;
+        this.telefoneFixo = telefoneFixo;
+        this.telefoneCelular = telefoneCelular;
+        this.senha = senha;
+        this.tipoServico = tipoServico;
+        this.diasDisponiveis = diasDisponiveis;
+        this.trabalhaFeriados = trabalhaFeriados;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
+        this.horarioFeriadoInicio = horarioFeriadoInicio;
+        this.horarioFeriadoFim = horarioFeriadoFim;
+        this.isLogado = isLogado;
+        this.mediaFeedback = mediaFeedback;
+        this.endereco = endereco;
+    }
 
-        for (String it : novoContratado.getDiasDisponiveis()) {
-            qtdDiasDisponiveis.append(" ").append(it);
-        }
-
-        return new Contratado(
-                novoContratado.email,
-                novoContratado.nome,
-                novoContratado.cpf,
-                novoContratado.rg,
-                novoContratado.genero,
-                novoContratado.dataNascimento,
-                novoContratado.telefoneFixo,
-                novoContratado.telefoneCelular,
-                novoContratado.senha,
-                novoContratado.tipoServico,
-                qtdDiasDisponiveis.toString(),
-                novoContratado.trabalhaFeriados,
-                novoContratado.horarioInicio,
-                novoContratado.horarioFim,
-                novoContratado.horarioFeriadoInicio,
-                novoContratado.horarioFeriadoFim,
-                novoContratado.isLogado = false,
-                novoContratado.mediaFeedback = 0,
-                new Endereco(
-                        novoContratado.getEndereco().getIdEndereco(),
-                        novoContratado.getEndereco().getEndereco(),
-                        novoContratado.getEndereco().getComplemento(),
-                        novoContratado.getEndereco().getNumero(),
-                        novoContratado.getEndereco().getBairro(),
-                        novoContratado.getEndereco().getPais(),
-                        novoContratado.getEndereco().getEstado(),
-                        novoContratado.getEndereco().getCidade()
-                )
-        );
+    public Profissional(String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String senha, String tipoServico, String toString, String trabFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean aBoolean, Integer integer, Endereco endereco) {
+        this.email = email;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.genero = genero;
+        this.dataNascimento = dataNascimento;
+        this.telefoneFixo = telefoneFixo;
+        this.telefoneCelular = telefoneCelular;
+        this.senha = senha;
+        this.tipoServico = tipoServico;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
+        this.horarioFeriadoInicio = horarioFeriadoInicio;
+        this.horarioFeriadoFim = horarioFeriadoFim;
+        this.endereco = endereco;
     }
 
     public Integer getIdContratado() {
@@ -179,6 +202,14 @@ public class ContratadoRequestDTO {
         this.telefoneCelular = telefoneCelular;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public String getTipoServico() {
         return tipoServico;
     }
@@ -187,19 +218,19 @@ public class ContratadoRequestDTO {
         this.tipoServico = tipoServico;
     }
 
-    public List<String> getDiasDisponiveis() {
+    public String getDiasDisponiveis() {
         return diasDisponiveis;
     }
 
-    public void setDiasDisponiveis(List<String> diasDisponiveis) {
+    public void setDiasDisponiveis(String diasDisponiveis) {
         this.diasDisponiveis = diasDisponiveis;
     }
 
-    public String getTrabalhaFeriados() {
+    public Boolean getTrabalhaFeriados() {
         return trabalhaFeriados;
     }
 
-    public void setTrabalhaFeriados(String trabalhaFeriados) {
+    public void setTrabalhaFeriados(Boolean trabalhaFeriados) {
         this.trabalhaFeriados = trabalhaFeriados;
     }
 
@@ -258,12 +289,5 @@ public class ContratadoRequestDTO {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 }
+

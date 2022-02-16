@@ -11,6 +11,7 @@ public class Endereco {
     @Column(name = "id_endereco")
     @JsonProperty("id_endereco")
     private int idEndereco;
+    private String cep;
     private String endereco;
     private String complemento;
     private Integer numero;

@@ -1,76 +1,109 @@
 package com.bandtec.darlingjob.dto;
 
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
+import com.bandtec.darlingjob.gateway.repository.dominio.Profissional;
 import com.bandtec.darlingjob.gateway.repository.dominio.Endereco;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ContratadoResponseDTO {
+import java.util.List;
+
+public class ProfissionalRequestDTO {
+    @JsonProperty("id_contratado")
     private Integer idContratado;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("nome")
     private String nome;
+
+    @JsonProperty("cpf")
     private String cpf;
+
+    @JsonProperty("rg")
     private String rg;
+
+    @JsonProperty("genero")
     private String genero;
+
+    @JsonProperty("data_nascimento")
     private String dataNascimento;
+
+    @JsonProperty("telefone_fixo")
     private String telefoneFixo;
+
+    @JsonProperty("telefone_celular")
     private String telefoneCelular;
+
+    @JsonProperty("tipo_servico")
     private String tipoServico;
-    private String diasDisponiveis;
+
+    @JsonProperty("dias_disponiveis")
+    private List<String> diasDisponiveis;
+
+    @JsonProperty("trabalha_feriados")
     private String trabalhaFeriados;
+
+    @JsonProperty("horario_inicio")
     private String horarioInicio;
+
+    @JsonProperty("horario_fim")
     private String horarioFim;
+
+    @JsonProperty("horario_feriado_inicio")
     private String horarioFeriadoInicio;
+
+    @JsonProperty("horario_feriado_fim")
     private String horarioFeriadoFim;
+
+    @JsonProperty("is_logado")
     private Boolean isLogado = false;
+
+    @JsonProperty("media_feedback")
     private Integer mediaFeedback = 0;
+
+    @JsonProperty("endereco")
     private Endereco endereco;
 
+    @JsonProperty("senha")
+    private String senha;
 
-    public ContratadoResponseDTO() {
-    }
+    public static Profissional convertToDomain(ProfissionalRequestDTO novoContratado) {
 
-    public ContratadoResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, String trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
-        this.idContratado = idContratado;
-        this.email = email;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.genero = genero;
-        this.dataNascimento = dataNascimento;
-        this.telefoneFixo = telefoneFixo;
-        this.telefoneCelular = telefoneCelular;
-        this.tipoServico = tipoServico;
-        this.diasDisponiveis = diasDisponiveis;
-        this.trabalhaFeriados = trabalhaFeriados;
-        this.horarioInicio = horarioInicio;
-        this.horarioFim = horarioFim;
-        this.horarioFeriadoInicio = horarioFeriadoInicio;
-        this.horarioFeriadoFim = horarioFeriadoFim;
-        this.isLogado = isLogado;
-        this.mediaFeedback = mediaFeedback;
-        this.endereco = endereco;
-    }
+        StringBuilder qtdDiasDisponiveis = new StringBuilder();
 
-    public static ContratadoResponseDTO convertFromDomain(Contratado contratado) {
-        return new ContratadoResponseDTO(
-                contratado.getIdContratado(),
-                contratado.getEmail(),
-                contratado.getNome(),
-                contratado.getCpf(),
-                contratado.getRg(),
-                contratado.getGenero(),
-                contratado.getDataNascimento(),
-                contratado.getTelefoneFixo(),
-                contratado.getTelefoneCelular(),
-                contratado.getTipoServico(),
-                contratado.getDiasDisponiveis(),
-                contratado.getTrabalhaFeriados(),
-                contratado.getHorarioInicio(),
-                contratado.getHorarioFim(),
-                contratado.getHorarioFeriadoInicio(),
-                contratado.getHorarioFeriadoFim(),
-                contratado.isLogado,
-                contratado.getMediaFeedback(),
-                contratado.getEndereco()
+        for (String it : novoContratado.getDiasDisponiveis()) {
+            qtdDiasDisponiveis.append(" ").append(it);
+        }
+
+        return new Profissional(
+                novoContratado.email,
+                novoContratado.nome,
+                novoContratado.cpf,
+                novoContratado.rg,
+                novoContratado.genero,
+                novoContratado.dataNascimento,
+                novoContratado.telefoneFixo,
+                novoContratado.telefoneCelular,
+                novoContratado.senha,
+                novoContratado.tipoServico,
+                qtdDiasDisponiveis.toString(),
+                novoContratado.trabalhaFeriados,
+                novoContratado.horarioInicio,
+                novoContratado.horarioFim,
+                novoContratado.horarioFeriadoInicio,
+                novoContratado.horarioFeriadoFim,
+                novoContratado.isLogado = false,
+                novoContratado.mediaFeedback = 0,
+                new Endereco(
+                        novoContratado.getEndereco().getIdEndereco(),
+                        novoContratado.getEndereco().getEndereco(),
+                        novoContratado.getEndereco().getComplemento(),
+                        novoContratado.getEndereco().getNumero(),
+                        novoContratado.getEndereco().getBairro(),
+                        novoContratado.getEndereco().getPais(),
+                        novoContratado.getEndereco().getEstado(),
+                        novoContratado.getEndereco().getCidade()
+                )
         );
     }
 
@@ -154,11 +187,11 @@ public class ContratadoResponseDTO {
         this.tipoServico = tipoServico;
     }
 
-    public String getDiasDisponiveis() {
+    public List<String> getDiasDisponiveis() {
         return diasDisponiveis;
     }
 
-    public void setDiasDisponiveis(String diasDisponiveis) {
+    public void setDiasDisponiveis(List<String> diasDisponiveis) {
         this.diasDisponiveis = diasDisponiveis;
     }
 
@@ -224,5 +257,13 @@ public class ContratadoResponseDTO {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

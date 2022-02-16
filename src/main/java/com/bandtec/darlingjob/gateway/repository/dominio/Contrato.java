@@ -16,42 +16,44 @@ public class Contrato {
     private String valor;
 
     @Column(name = "is_acepted")
-    private String isAcepted = "NR";
+    private String isAcepted;
 
     @ManyToOne
-    @JoinColumn(name = "id_contratante")
-    private Contratante contratante;
+    @JoinColumn(name = "id_usuario_contratante")
+    private Usuario contratante;
 
     @ManyToOne
-    @JoinColumn(name = "id_contratado")
-    private Contratado contratado;
+    @JoinColumn(name = "id_usuario_profissional")
+    private Usuario contratado;
 
-    public Contrato(){
+    public Contrato() {
     }
 
-    public Contrato(Integer idContrato, Integer idContratado, Integer idContratante, String categoria, String endereco, String data, String hora, String valor) {
+    public Contrato(Integer idContrato, String categoria, String endereco, String data, String hora, String valor, String isAcepted, Usuario contratante, Usuario contratado) {
         this.idContrato = idContrato;
         this.categoria = categoria;
         this.endereco = endereco;
         this.data = data;
         this.hora = hora;
         this.valor = valor;
+        this.isAcepted = isAcepted;
+        this.contratante = contratante;
+        this.contratado = contratado;
+    }
+
+    public Contrato(Object o, int idContratada, int idContratante, String categoria, String endereco, String data, String hora, String valor) {
     }
 
     public Integer getIdContrato() {
         return idContrato;
     }
 
+    public void setIdContrato(Integer idContrato) {
+        this.idContrato = idContrato;
+    }
+
     public String getCategoria() {
         return categoria;
-    }
-
-    public String getAcepted() {
-        return isAcepted;
-    }
-
-    public void setAcepted(String acepted) {
-        isAcepted = acepted;
     }
 
     public void setCategoria(String categoria) {
@@ -64,10 +66,6 @@ public class Contrato {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public void setIdContrato(Integer idContrato) {
-        this.idContrato = idContrato;
     }
 
     public String getData() {
@@ -102,19 +100,19 @@ public class Contrato {
         this.isAcepted = isAcepted;
     }
 
-    public Contratante getContratante() {
+    public Usuario getContratante() {
         return contratante;
     }
 
-    public void setContratante(Contratante contratante) {
+    public void setContratante(Usuario contratante) {
         this.contratante = contratante;
     }
 
-    public Contratado getContratado() {
+    public Usuario getContratado() {
         return contratado;
     }
 
-    public void setContratado(Contratado contratado) {
+    public void setContratado(Usuario contratado) {
         this.contratado = contratado;
     }
 }

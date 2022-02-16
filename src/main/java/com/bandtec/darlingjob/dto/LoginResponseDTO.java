@@ -1,6 +1,6 @@
 package com.bandtec.darlingjob.dto;
 
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
+import com.bandtec.darlingjob.gateway.repository.dominio.Profissional;
 import com.bandtec.darlingjob.gateway.repository.dominio.Endereco;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -40,7 +40,7 @@ public class LoginResponseDTO {
     private String diasDisponiveis;
 
     @JsonProperty("trabalha_feriados")
-    private String trabalhaFeriados;
+    private Boolean trabalhaFeriados;
 
     @JsonProperty("horario_inicio")
     private String horarioInicio;
@@ -66,7 +66,7 @@ public class LoginResponseDTO {
     public LoginResponseDTO() {
     }
 
-    public LoginResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, String trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
+    public LoginResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, Boolean trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Boolean isLogado, Integer mediaFeedback, Endereco endereco) {
         this.idContratado = idContratado;
         this.email = email;
         this.nome = nome;
@@ -88,27 +88,27 @@ public class LoginResponseDTO {
         this.endereco = endereco;
     }
 
-    public static LoginResponseDTO convertFromDomain(Contratado contratado) {
+    public static LoginResponseDTO convertFromDomain(Profissional profissional) {
         return new LoginResponseDTO(
-                contratado.getIdContratado(),
-                contratado.getEmail(),
-                contratado.getNome(),
-                contratado.getCpf(),
-                contratado.getRg(),
-                contratado.getGenero(),
-                contratado.getDataNascimento(),
-                contratado.getTelefoneFixo(),
-                contratado.getTelefoneCelular(),
-                contratado.getTipoServico(),
-                contratado.getDiasDisponiveis(),
-                contratado.getTrabalhaFeriados(),
-                contratado.getHorarioInicio(),
-                contratado.getHorarioFim(),
-                contratado.getHorarioFeriadoInicio(),
-                contratado.getHorarioFeriadoFim(),
-                contratado.isLogado,
-                contratado.getMediaFeedback(),
-                contratado.getEndereco()
+                profissional.getIdContratado(),
+                profissional.getEmail(),
+                profissional.getNome(),
+                profissional.getCpf(),
+                profissional.getRg(),
+                profissional.getGenero(),
+                profissional.getDataNascimento(),
+                profissional.getTelefoneFixo(),
+                profissional.getTelefoneCelular(),
+                profissional.getTipoServico(),
+                profissional.getDiasDisponiveis(),
+                profissional.getTrabalhaFeriados(),
+                profissional.getHorarioInicio(),
+                profissional.getHorarioFim(),
+                profissional.getHorarioFeriadoInicio(),
+                profissional.getHorarioFeriadoFim(),
+                profissional.isLogado,
+                profissional.getMediaFeedback(),
+                profissional.getEndereco()
         );
     }
 
@@ -200,11 +200,11 @@ public class LoginResponseDTO {
         this.diasDisponiveis = diasDisponiveis;
     }
 
-    public String getTrabalhaFeriados() {
+    public Boolean getTrabalhaFeriados() {
         return trabalhaFeriados;
     }
 
-    public void setTrabalhaFeriados(String trabalhaFeriados) {
+    public void setTrabalhaFeriados(Boolean trabalhaFeriados) {
         this.trabalhaFeriados = trabalhaFeriados;
     }
 

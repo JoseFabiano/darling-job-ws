@@ -2,8 +2,6 @@ package com.bandtec.darlingjob.gateway.controller;
 
 import com.bandtec.darlingjob.utils.PilhaObj;
 import com.bandtec.darlingjob.utils.Txt;
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratante;
 import com.bandtec.darlingjob.gateway.repository.dominio.Contrato;
 import com.bandtec.darlingjob.gateway.repository.ContratadoRepository;
 import com.bandtec.darlingjob.gateway.repository.ContratanteRepository;
@@ -15,12 +13,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/contrato")
@@ -53,7 +49,7 @@ public class ContratoController {
             for (int i = 0; i < contratos.size(); i++) {
                 Contrato contrato = contratos.get(i);
                 if (contrato.getIdContrato().equals(id)) {
-                    contrato.setAcepted("S");
+                    contrato.setIsAcepted("S");
                     repository.save(contrato);
                     return ResponseEntity.status(200).build();
                 }
@@ -68,7 +64,7 @@ public class ContratoController {
         for (int i = 0; i < contratos.size(); i++) {
             Contrato contrato = contratos.get(i);
             if (contrato.getIdContrato().equals(id)) {
-                contrato.setAcepted("N");
+                contrato.setIsAcepted("N");
                 repository.save(contrato);
                 return ResponseEntity.status(200).build();
             }
@@ -149,27 +145,27 @@ public class ContratoController {
                     .body(resource);
         }
 
-        @CrossOrigin
-        @PostMapping("/import")
-        public ResponseEntity importTxt(@RequestBody MultipartFile file) throws Exception {
-            byte[] data = file.getBytes();
-            FileOutputStream out = new FileOutputStream("contrato");
-            out.write(data);
-            List<Contrato> listaContrato =  txtConverter.leArquivoTxt("contrato.txt");
-            List<Contratante> listaContratante = contratanteRepository.findAll();
-            List<Contratado> listaContratado = contratadoRepository.findAll();
-            for (Contrato contrato : listaContrato){
-                if (listaContratado.stream().map(c -> c.getIdContratado()).collect(Collectors.toList()).contains(contrato.getContratado().getIdContratado())
-                && listaContratante.stream().map(c -> c.getIdContratante()).collect(Collectors.toList()).contains(contrato.getContratante().getIdContratante())){
-                    repository.save(contrato);
-                }else{
-                    throw new Exception("Contratado ou Contratante não existente");
-                }
-            }
-            PrintWriter writer = new PrintWriter("contrato.txt");
-            writer.print("");
-            writer.close();
-
-            return ResponseEntity.status(200).body("Leu");
-        }
+//        @CrossOrigin
+//        @PostMapping("/import")
+//        public ResponseEntity importTxt(@RequestBody MultipartFile file) throws Exception {
+//            byte[] data = file.getBytes();
+//            FileOutputStream out = new FileOutputStream("contrato");
+//            out.write(data);
+//            List<Contrato> listaContrato =  txtConverter.leArquivoTxt("contrato.txt");
+//            List<Contratante> listaContratante = contratanteRepository.findAll();
+//            List<Contratado> listaContratado = contratadoRepository.findAll();
+//            for (Contrato contrato : listaContrato){
+////                if (listaContratado.stream().map(c -> c.getIdContratado()).collect(Collectors.toList()).contains(contrato.getContratado().getIdContratado())
+////                && listaContratante.stream().map(c -> c.getIdContratante()).collect(Collectors.toList()).contains(contrato.getContratante().getIdContratante())){
+//                    repository.save(contrato);
+//                }else{
+//                    throw new Exception("Contratado ou Contratante não existente");
+//                }
+//            }
+//            PrintWriter writer = new PrintWriter("contrato.txt");
+//            writer.print("");
+//            writer.close();
+//
+//            return ResponseEntity.status(200).body("Leu");
+//        }
 }

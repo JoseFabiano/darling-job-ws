@@ -54,8 +54,8 @@ public class Txt {
         for (Contrato c : lista) {
             corpo = "02";
             corpo += String.format("%03d",c.getIdContrato());
-            corpo += String.format("%03d", c.getContratado().getIdContratado());
-            corpo += String.format("%03d", c.getContratante().getIdContratante());
+//            corpo += String.format("%03d", c.getContratado().getIdContratado());
+//            corpo += String.format("%03d", c.getContratante().getIdContratante());
             corpo += String.format("%-15.15s", c.getCategoria());
             corpo += String.format("%-30.30s", c.getEndereco());
             corpo += String.format("%-15.15s", c.getData());

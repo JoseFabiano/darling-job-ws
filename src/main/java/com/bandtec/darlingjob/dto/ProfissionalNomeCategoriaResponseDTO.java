@@ -1,11 +1,11 @@
 package com.bandtec.darlingjob.dto;
 
-public class ContratadoNomeCategoriaResponseDTO {
+public class ProfissionalNomeCategoriaResponseDTO {
 
     private String categoria;
     private String nome;
 
-    public ContratadoNomeCategoriaResponseDTO(String categoria, String nome) {
+    public ProfissionalNomeCategoriaResponseDTO(String categoria, String nome) {
 
         this.categoria = categoria;
         this.nome = nome;

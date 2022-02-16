@@ -1,6 +1,6 @@
 package com.bandtec.darlingjob.gateway.repository;
 
-import com.bandtec.darlingjob.gateway.repository.dominio.Contratado;
+import com.bandtec.darlingjob.gateway.repository.dominio.Profissional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ContratadoRepository extends JpaRepository<Contratado, Integer> {
-    Optional<Contratado> findByNomeAndSenha(String nome, String senha);
+public interface ContratadoRepository extends JpaRepository<Profissional, Integer> {
+    Optional<Profissional> findByNomeAndSenha(String nome, String senha);
 
-    List<Contratado> findByTipoServicoLike(String tipoServico);
+    List<Profissional> findByTipoServicoLike(String tipoServico);
 
 //    @Query(value = "SELECT c.id_contratado, c.nome FROM Contratado c WHERE c.nome = ?1", nativeQuery = true)
 //    List<Contratado> findContratadoNome(String nome);
 
-    List<Contratado> findByNomeLike(String nome);
+    List<Profissional> findByNomeLike(String nome);
 //
 //    @Query(value = "SELECT * FROM Contratado c, FLOOR((CAST (GetDate() AS DECIMAL) - CAST(c.dataNascimento AS DECIMAL)) / 365.25) WHERE c.tipoServico" +
 //            "= ?1", nativeQuery = true)
