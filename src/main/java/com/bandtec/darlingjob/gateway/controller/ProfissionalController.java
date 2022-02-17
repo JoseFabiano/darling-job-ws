@@ -1,13 +1,9 @@
 package com.bandtec.darlingjob.gateway.controller;
 
 import com.bandtec.darlingjob.dto.ProfissionalResponseDTO;
-import com.bandtec.darlingjob.dto.LoginRequestDTO;
-import com.bandtec.darlingjob.dto.LoginResponseDTO;
 import com.bandtec.darlingjob.service.ListarProfissionais;
 import com.bandtec.darlingjob.service.PesquisarProfissionalByNome;
 import com.bandtec.darlingjob.service.PesquisarProfissionalByTipoServico;
-import com.bandtec.darlingjob.service.contratado.ProfissionalService;
-import com.bandtec.darlingjob.dto.ProfissionalRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -16,7 +16,8 @@ public class PesquisarProfissionalByNome {
     private UsuarioRepository usuarioRepository;
 
     public List<ProfissionalResponseDTO> execute(String nome){
-        return Stream.of(usuarioRepository.findByNomeIsLikeAndRoleEquals(nome, "profissional"))
+        return usuarioRepository.findByNomeIsLikeAndRoleEquals(nome, "profissional")
+                .stream()
                 .map(ProfissionalResponseDTO::convertFromDomain)
                 .collect(Collectors.toList());
     }

@@ -21,7 +21,7 @@ public class PesquisarProfissionalByTipoServico {
 
         //                    if (it == null){
         //                        return new java.util.ArrayList<ProfissionalResponseDTO>();
-        return usuarioRepository.findByTipoServicoContainsAndRoleEquals(tipoServico, "profissional")
+        return usuarioRepository.findByTipoServicoIsLikeAndRoleIs(tipoServico, "profissional")
                 .stream()
                 .map(ProfissionalResponseDTO::convertFromDomain)
                 .collect(Collectors.toList());
