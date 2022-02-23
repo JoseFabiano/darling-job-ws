@@ -15,9 +15,6 @@ import java.util.*;
 @RequestMapping("/profissional")
 public class ProfissionalController {
 
-//    @Autowired
-//    private ProfissionalService profissionalService;
-
     @Autowired
     private ListarProfissionais listarProfissionais;
 

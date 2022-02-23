@@ -34,6 +34,10 @@ public class Contratante{
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
     public Integer getIdContratante() {
         return idContratante;
     }

@@ -14,6 +14,7 @@ public class Contrato {
     private String data;
     private String hora;
     private String valor;
+    private String feedback;
 
     @Column(name = "is_acepted")
     private String isAcepted;
@@ -42,6 +43,27 @@ public class Contrato {
     }
 
     public Contrato(Object o, int idContratada, int idContratante, String categoria, String endereco, String data, String hora, String valor) {
+    }
+
+    public Contrato(Integer idContrato, String categoria, String endereco, String data, String hora, String valor, String feedback, String isAcepted, Usuario contratante, Usuario contratado) {
+        this.idContrato = idContrato;
+        this.categoria = categoria;
+        this.endereco = endereco;
+        this.data = data;
+        this.hora = hora;
+        this.valor = valor;
+        this.feedback = feedback;
+        this.isAcepted = isAcepted;
+        this.contratante = contratante;
+        this.contratado = contratado;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 
     public Integer getIdContrato() {

@@ -5,11 +5,8 @@ import com.bandtec.darlingjob.gateway.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class PesquisarProfissionalByTipoServico {
@@ -18,9 +15,6 @@ public class PesquisarProfissionalByTipoServico {
     private UsuarioRepository usuarioRepository;
 
     public List<ProfissionalResponseDTO> execute(String tipoServico) {
-
-        //                    if (it == null){
-        //                        return new java.util.ArrayList<ProfissionalResponseDTO>();
         return usuarioRepository.findByTipoServicoIsLikeAndRoleIs(tipoServico, "profissional")
                 .stream()
                 .map(ProfissionalResponseDTO::convertFromDomain)
