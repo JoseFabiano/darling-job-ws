@@ -18,6 +18,9 @@ public class Usuario {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "descricao")
+    private String descricao;
+
     @Column(name = "telefone_celular")
     private String telefoneCelular;
 
@@ -86,6 +89,37 @@ public class Usuario {
         this.trabalhaFeriados = trabalhaFeriados;
         this.tipoServico = tipoServico;
         this.endereco = endereco;
+    }
+
+    public Usuario(Integer idUsuario, String nome, String senha, String email, String descricao, String telefoneCelular, String telefoneFixo, String rg, String cpf, String dataNascimento, String genero, String diasDisponiveis, String horarioFeriadoFim, String horarioFeriadoInicio, String horarioInicioDia, String horarioFimDia, Boolean trabalhaFeriados, String tipoServico, String role, Endereco endereco) {
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.senha = senha;
+        this.email = email;
+        this.descricao = descricao;
+        this.telefoneCelular = telefoneCelular;
+        this.telefoneFixo = telefoneFixo;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.diasDisponiveis = diasDisponiveis;
+        this.horarioFeriadoFim = horarioFeriadoFim;
+        this.horarioFeriadoInicio = horarioFeriadoInicio;
+        this.horarioInicioDia = horarioInicioDia;
+        this.horarioFimDia = horarioFimDia;
+        this.trabalhaFeriados = trabalhaFeriados;
+        this.tipoServico = tipoServico;
+        this.role = role;
+        this.endereco = endereco;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Integer getIdUsuario() {

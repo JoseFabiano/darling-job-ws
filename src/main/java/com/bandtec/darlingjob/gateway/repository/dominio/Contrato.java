@@ -1,5 +1,7 @@
 package com.bandtec.darlingjob.gateway.repository.dominio;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +21,10 @@ public class Contrato {
     @Column(name = "is_acepted")
     private String isAcepted;
 
+    private String wasPerformed;
+
+    private Integer avaliacao;
+
     @ManyToOne
     @JoinColumn(name = "id_usuario_contratante")
     private Usuario contratante;
@@ -28,6 +34,40 @@ public class Contrato {
     private Usuario contratado;
 
     public Contrato() {
+    }
+
+    public Contrato(String categoria, String data, String valor, String endereco, Usuario contratante, Usuario contratado) {
+        this.categoria = categoria;
+        this.data = data;
+        this.valor = valor;
+        this.endereco = endereco;
+        this.contratante = contratante;
+        this.contratado = contratado;
+    }
+
+    public Contrato(Integer idContrato, String categoria, String endereco, String data, String hora, String valor, String feedback, String isAcepted, String wasPerformed, Integer avaliacao, Usuario contratante, Usuario contratado) {
+        this.idContrato = idContrato;
+        this.categoria = categoria;
+        this.endereco = endereco;
+        this.data = data;
+        this.hora = hora;
+        this.valor = valor;
+        this.feedback = feedback;
+        this.isAcepted = isAcepted;
+        this.wasPerformed = wasPerformed;
+        this.avaliacao = avaliacao;
+        this.contratante = contratante;
+        this.contratado = contratado;
+    }
+
+    public Contrato(String categoria, String endereco, String data, String hora, String valor, String feedback, String isAcepted, String wasPerformed, Integer avaliacao, Usuario contratante, Usuario contratado) {
+        this.categoria = categoria;
+        this.endereco = endereco;
+        this.data = data;
+        this.hora = hora;
+        this.valor = valor;
+        this.contratante = contratante;
+        this.contratado = contratado;
     }
 
     public Contrato(Integer idContrato, String categoria, String endereco, String data, String hora, String valor, String isAcepted, Usuario contratante, Usuario contratado) {
@@ -45,17 +85,20 @@ public class Contrato {
     public Contrato(Object o, int idContratada, int idContratante, String categoria, String endereco, String data, String hora, String valor) {
     }
 
-    public Contrato(Integer idContrato, String categoria, String endereco, String data, String hora, String valor, String feedback, String isAcepted, Usuario contratante, Usuario contratado) {
-        this.idContrato = idContrato;
-        this.categoria = categoria;
-        this.endereco = endereco;
-        this.data = data;
-        this.hora = hora;
-        this.valor = valor;
-        this.feedback = feedback;
-        this.isAcepted = isAcepted;
-        this.contratante = contratante;
-        this.contratado = contratado;
+    public String getWasPerformed() {
+        return wasPerformed;
+    }
+
+    public void setWasPerformed(String wasPerformed) {
+        this.wasPerformed = wasPerformed;
+    }
+
+    public Integer getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Integer avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public String getFeedback() {
