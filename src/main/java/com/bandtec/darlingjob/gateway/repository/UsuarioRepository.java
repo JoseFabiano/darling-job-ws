@@ -12,7 +12,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Optional<Usuario> findByNomeAndSenha(String nome, String senha);
 
-    @Query(value = "SELECT id_usuario, horario_feriado_fim, horario_feriado_inicio, cpf, data_nascimento, dias_disponiveis, email, genero, horario_fim_dia, horario_inicio_dia, nome, rg, [role], senha, telefone_celular, telefone_fixo, tipo_servico, trabalha_feriados, id_endereco " +
+    @Query(value = "SELECT id_usuario, horario_feriado_fim, horario_feriado_inicio, cpf, data_nascimento, dias_disponiveis, email, genero, horario_fim_dia, horario_inicio_dia, nome, rg, [role], senha, telefone_celular, telefone_fixo, tipo_servico, trabalha_feriados, id_endereco, descricao " +
             "FROM [darling-job].dbo.usuario u " +
             "where (u.tipo_servico like CONCAT('%', :tipoServico, '%') and u.role = :role)", nativeQuery = true)
     List<Usuario> findByTipoServicoIsLikeAndRoleIs(String tipoServico, String role);

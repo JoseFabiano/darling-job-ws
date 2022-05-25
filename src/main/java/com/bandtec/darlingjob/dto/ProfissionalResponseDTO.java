@@ -25,6 +25,7 @@ public class ProfissionalResponseDTO {
     private Integer mediaFeedback = 0;
     private Endereco endereco;
 
+    private String descricao;
 
     public ProfissionalResponseDTO() {
     }
@@ -51,7 +52,7 @@ public class ProfissionalResponseDTO {
         this.endereco = endereco;
     }
 
-    public ProfissionalResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, Boolean trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Endereco endereco) {
+    public ProfissionalResponseDTO(Integer idContratado, String email, String nome, String cpf, String rg, String genero, String dataNascimento, String telefoneFixo, String telefoneCelular, String tipoServico, String diasDisponiveis, Boolean trabalhaFeriados, String horarioInicio, String horarioFim, String horarioFeriadoInicio, String horarioFeriadoFim, Endereco endereco, String descricao) {
         this.idContratado = idContratado;
         this.email = email;
         this.nome = nome;
@@ -69,6 +70,7 @@ public class ProfissionalResponseDTO {
         this.horarioFeriadoInicio = horarioFeriadoInicio;
         this.horarioFeriadoFim = horarioFeriadoFim;
         this.endereco = endereco;
+        this.descricao = descricao;
     }
 
     public static ProfissionalResponseDTO convertFromDomain(Usuario usuario) {
@@ -94,7 +96,8 @@ public class ProfissionalResponseDTO {
                 usuario.getHorarioFimDia(),
                 usuario.getHorarioFeriadoInicio(),
                 usuario.getHorarioFeriadoFim(),
-                usuario.getEndereco()
+                usuario.getEndereco(),
+                usuario.getDescricao()
         );
     }
     public static ProfissionalResponseDTO convertFromDomain(Profissional profissional) {

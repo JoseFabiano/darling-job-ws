@@ -45,6 +45,26 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public Endereco(int idEndereco, String cep, String endereco, String complemento, Integer numero, String bairro, String pais, String estado, String cidade) {
+        this.idEndereco = idEndereco;
+        this.cep = cep;
+        this.endereco = endereco;
+        this.complemento = complemento;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public int getIdEndereco() {
         return idEndereco;
     }

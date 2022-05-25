@@ -81,6 +81,10 @@ public class Profissional {
     @Column(name = "media_feedback")
     private Integer mediaFeedback = 0;
 
+    @JsonProperty("descricao")
+    @Column(name = "descricao")
+    private String descricao;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
@@ -288,6 +292,14 @@ public class Profissional {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
 
