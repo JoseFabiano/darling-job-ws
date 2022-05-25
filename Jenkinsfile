@@ -1,16 +1,21 @@
 pipeline {
-    agent any
-
     stages {
-        stage('STAGE 00') {
+        stage('Build Jar') {
             steps {
-                echo 'Pipeline Usando Jenkinsfile'
+                echo 'building jar file ...'
+                sh'./mvnw package'
             }
         }
-
-        stage('STAGE 01') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Pipeline Usando Jenkinsfile'
+                echo 'bulding docker image ...'
+                sh 'docker build -t darling-job-ws .'
+            }
+        }
+        stage('Docker Run') {
+            steps {
+                echo 'deploying container ...'
+                sh 'docker run -dit --name darling-job-ws -p 8080:8080 darling-job-ws:latest'
             }
         }
     }
