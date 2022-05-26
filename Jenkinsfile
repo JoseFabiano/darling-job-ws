@@ -1,4 +1,4 @@
-def suiteRunId = UUID.randomUUID().toString().replace('-', '').subscript(1, 9)
+def suiteRunId = UUID.randomUUID().toString().replace('-', '').substring(1, 9)
 pipeline {
     agent any
     stages {
