@@ -1,8 +1,3 @@
-import org.apache.commons.lang.RandomStringUtils
-
-String charset = (('A'..'Z') + ('0'..'9')).join()
-Integer length = 9
-String randomString = RandomStringUtils.random(length, charset.toCharArray())
 pipeline {
     agent any
     stages {
@@ -21,7 +16,8 @@ pipeline {
         stage('Docker Run') {
             steps {
                 echo 'deploying container ...'
-                sh "docker run -dit --name darling-job-ws:${randomString} -p 8080:8080 darling-job-ws:latest"
+                sh 'docker container stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
+                sh 'docker run -dit --name darling-job-ws -p 8080:8080 darling-job-ws:latest'
             }
         }
     }
