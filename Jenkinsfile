@@ -1,3 +1,4 @@
+def suiteRunId = UUID.randomUUID().toString()
 pipeline {
     agent any
     stages {
@@ -14,7 +15,6 @@ pipeline {
             }
         }
         stage('Docker Run') {
-            suiteRunId = UUID.randomUUID().toString()
             steps {
                 echo 'deploying container ...'
                 sh "docker run -dit --name darling-job-ws:${suiteRunId} -p 8080:8080 darling-job-ws:latest"
