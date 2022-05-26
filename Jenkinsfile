@@ -1,4 +1,5 @@
-def suiteRunId = UUID.randomUUID().toString().replace('-', '').substring(1, 9)pipeline {
+def suiteRunId = UUID.randomUUID().toString().replace('-', '').subscript(1, 9)
+pipeline {
     agent any
     stages {
         stage('Build Jar') {
