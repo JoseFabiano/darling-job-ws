@@ -15,8 +15,9 @@ pipeline {
         }
         stage('Docker Run') {
             steps {
+                def suiteRunId = UUID.randomUUID().toString()
                 echo 'deploying container ...'
-                sh 'docker run -dit --name darling-job-ws -p 8080:8080 darling-job-ws:latest'
+                sh "docker run -dit --name darling-job-ws${suiteRunId} -p 8080:8080 darling-job-ws:latest"
             }
         }
     }
