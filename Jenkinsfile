@@ -1,4 +1,4 @@
-pipeline {
+def suiteRunId = UUID.randomUUID().toString().replace('-', '').substring(1, 9)pipeline {
     agent any
     stages {
         stage('Build Jar') {
@@ -10,17 +10,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'bulding docker image ...'
-                try{
-                    sh 'docker container stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
-                } catch(exc) {
-                    sh 'docker build -t darling-job-ws .'
-                }
+                sh 'docker build -t darling-job-ws .'
             }
         }
         stage('Docker Run') {
             steps {
                 echo 'deploying container ...'
-                sh 'docker run -dit --name darling-job-ws -p 8080:8080 darling-job-ws:latest'
+                sh "docker run -dit --name darling-job-ws:${suiteRunId} -p 8080:8080 darling-job-ws:latest"
             }
         }
     }
