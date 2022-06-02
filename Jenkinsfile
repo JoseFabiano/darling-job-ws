@@ -17,8 +17,7 @@ pipeline {
         stage('Docker Run') {
             steps {
                 echo 'deploying container ...'
-                sh 'docker run alpine:latest'
-                sh 'docker kill $(docker ps -q)'
+                sh 'docker kill $(docker ps -q) || true'
                 sh "docker run -dit --name darling-job-ws${suiteRunId} -p 8080:8080 darling-job-ws:latest"
             }
         }
