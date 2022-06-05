@@ -1,4 +1,4 @@
-String suiteRunId = UUID.randomUUID().toString().replace('-', '').substring(1, 9)
+def suiteRunId = UUID.randomUUID().toString().replace('-', '').substring(1, 9)
 pipeline {
     agent any
     stages {
@@ -17,9 +17,8 @@ pipeline {
         stage('Docker Run') {
             steps {
                 echo 'deploying container ...'
-                sh 'docker run alpine:latest'
-                sh 'docker kill darling-job-ws'
-                sh 'docker run -dit --name darling-job-ws -p 8080:8080 darling-job-ws:latest'
+                sh 'docker kill $(docker ps -q) || true'
+                sh "docker run -dit --name darling-job-ws${suiteRunId} -p 8080:8080 darling-job-ws:latest"
             }
         }
     }
