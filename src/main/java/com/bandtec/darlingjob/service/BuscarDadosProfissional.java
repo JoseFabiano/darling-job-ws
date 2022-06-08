@@ -37,9 +37,16 @@ public class BuscarDadosProfissional {
         List<FeedbacksDTO> feedbacksDTOList = new ArrayList<>();
 
         listContratos.forEach(it -> {
+
+            Integer avaliacao = 0;
+
+            if (it.getAvaliacao() != null){
+                avaliacao = it.getAvaliacao();
+            }
+
             feedbacksDTOList.add(new FeedbacksDTO(
                     it.getFeedback(),
-                    it.getAvaliacao().toString()
+                    avaliacao.toString()
             ));
         });
 
