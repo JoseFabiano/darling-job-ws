@@ -28,9 +28,9 @@ public class ContratoController {
     @Autowired
     private FinalizarContrato finalizarContrato;
 
-    @GetMapping
+    @GetMapping("/{idUsuario}")
     public ResponseEntity<List<ContratoResponseDTO>> getContratos(
-            @RequestParam("id_usuario") String idUsuario
+            @PathVariable String idUsuario
     ) {
 
         List<ContratoResponseDTO> contratos = listarContratos.execute(idUsuario);

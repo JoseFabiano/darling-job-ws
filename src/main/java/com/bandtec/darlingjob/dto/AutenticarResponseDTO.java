@@ -1,5 +1,6 @@
 package com.bandtec.darlingjob.dto;
 
+import com.bandtec.darlingjob.gateway.repository.dominio.Endereco;
 import com.bandtec.darlingjob.gateway.repository.dominio.Usuario;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -52,7 +53,10 @@ public class AutenticarResponseDTO {
     @JsonProperty("trabalhaFeriados")
     private Boolean trabalhaFeriados;
 
-    public AutenticarResponseDTO(Integer idUsuario, String nome, String email, String telefoneCelular, String telefoneFixo, String rg, String cpf, String dataNascimento, String genero, String role) {
+    @JsonProperty("endereco")
+    private Endereco endereco;
+
+    public AutenticarResponseDTO(Integer idUsuario, String nome, String email, String telefoneCelular, String telefoneFixo, String rg, String cpf, String dataNascimento, String genero, String role, Endereco endereco) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -63,9 +67,10 @@ public class AutenticarResponseDTO {
         this.dataNascimento = dataNascimento;
         this.genero = genero;
         this.role = role;
+        this.endereco = endereco;
     }
 
-    public AutenticarResponseDTO(Integer idUsuario, String nome, String email, String telefoneCelular, String telefoneFixo, String rg, String cpf, String dataNascimento, String genero, String role, String diasDisponiveis, String horarioFeriadoFim, String horarioFeriadoInicio, String horarioInicioDia, String horarioFimDia, Boolean trabalhaFeriados) {
+    public AutenticarResponseDTO(Integer idUsuario, String nome, String email, String telefoneCelular, String telefoneFixo, String rg, String cpf, String dataNascimento, String genero, String role, String diasDisponiveis, String horarioFeriadoFim, String horarioFeriadoInicio, String horarioInicioDia, String horarioFimDia, Boolean trabalhaFeriados, Endereco endereco) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -82,6 +87,7 @@ public class AutenticarResponseDTO {
         this.horarioInicioDia = horarioInicioDia;
         this.horarioFimDia = horarioFimDia;
         this.trabalhaFeriados = trabalhaFeriados;
+        this.endereco = endereco;
     }
 
     public static AutenticarResponseDTO convertFromDomain(Usuario usuario) {
@@ -101,7 +107,8 @@ public class AutenticarResponseDTO {
                 usuario.getHorarioFeriadoInicio(),
                 usuario.getHorarioInicioDia(),
                 usuario.getHorarioFimDia(),
-                usuario.getTrabalhaFeriados()
+                usuario.getTrabalhaFeriados(),
+                usuario.getEndereco()
         );
     }
 }

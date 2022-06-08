@@ -32,6 +32,7 @@ public class Endereco {
         this.pais = pais;
         this.estado = estado;
         this.cidade = cidade;
+        this.cep = cep;
     }
 
     public Endereco(int idEndereco, String endereco, String complemento, Integer numero, String bairro, String pais, String estado, String cidade) {
