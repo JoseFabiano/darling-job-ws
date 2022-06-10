@@ -43,6 +43,21 @@ public class ContratoController {
 
     }
 
+    @GetMapping("/{idUsuario}/contratante")
+    public ResponseEntity<List<ContratoResponseDTO>> getContratosContratante(
+            @PathVariable String idUsuario
+    ) {
+
+        List<ContratoResponseDTO> contratos = listarContratos.executeContratante(idUsuario);
+
+        if (contratos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(contratos);
+        }
+
+    }
+
     @PostMapping
     public ResponseEntity<ContratoCriadoResponseDTO> criarContrato(
             @RequestBody CriarContratoRequestDTO criarContratoRequestDTO

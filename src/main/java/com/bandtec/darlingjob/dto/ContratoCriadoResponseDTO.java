@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ContratoCriadoResponseDTO {
 
-    public ContratoCriadoResponseDTO(Integer idContrato, String categoria, String data, String valor, String endereco, String isAcepted, Integer idUsuarioProfissional, Integer idUsuarioContratante, String wasPerformed, String feedback, Integer avaliacao) {
+    public ContratoCriadoResponseDTO(Integer idContrato, String categoria, String data, String valor, String endereco, String isAcepted, Integer idUsuarioProfissional, Integer idUsuarioContratante, String wasPerformed, String feedback, Integer avaliacao, String hora) {
         this.idContrato = idContrato;
         this.categoria = categoria;
         this.data = data;
@@ -17,6 +17,7 @@ public class ContratoCriadoResponseDTO {
         this.wasPerformed = wasPerformed;
         this.feedback = feedback;
         this.avaliacao = avaliacao;
+        this.hora = hora;
     }
 
     @JsonProperty("id_contrato")
@@ -52,6 +53,9 @@ public class ContratoCriadoResponseDTO {
     @JsonProperty("avaliacao")
     private Integer avaliacao;
 
+    @JsonProperty("hora")
+    private String hora;
+
     public static ContratoCriadoResponseDTO convertFromDomain(Contrato contrato) {
         return new ContratoCriadoResponseDTO(
                 contrato.getIdContrato(),
@@ -64,7 +68,8 @@ public class ContratoCriadoResponseDTO {
                 contrato.getContratante().getIdUsuario(),
                 contrato.getWasPerformed(),
                 contrato.getFeedback(),
-                contrato.getAvaliacao()
+                contrato.getAvaliacao(),
+                contrato.getHora()
         );
     }
 

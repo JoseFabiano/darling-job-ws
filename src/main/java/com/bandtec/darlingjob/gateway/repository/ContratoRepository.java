@@ -22,4 +22,8 @@ public interface ContratoRepository extends JpaRepository<Contrato, Integer> {
 //    List<Contrato> findByIdUsuario(String idUsuario);
 
     List<Contrato> findByContratado_IdUsuario(Integer idUsuario);
+
+    List<Contrato> findByContratante_IdUsuario(Integer idUsuario);
+
+
 }

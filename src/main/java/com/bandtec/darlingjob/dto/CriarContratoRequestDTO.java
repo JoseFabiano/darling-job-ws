@@ -16,6 +16,9 @@ public class CriarContratoRequestDTO {
     @JsonProperty("endereco")
     private String endereco;
 
+    @JsonProperty("hora")
+    private String hora;
+
     @JsonProperty("id_usuario_profissional")
     private Integer idUsuarioProfissional;
 
@@ -54,6 +57,14 @@ public class CriarContratoRequestDTO {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public Integer getIdUsuarioProfissional() {

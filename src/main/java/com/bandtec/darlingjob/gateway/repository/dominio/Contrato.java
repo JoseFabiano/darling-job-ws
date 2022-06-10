@@ -36,13 +36,14 @@ public class Contrato {
     public Contrato() {
     }
 
-    public Contrato(String categoria, String data, String valor, String endereco, Usuario contratante, Usuario contratado) {
+    public Contrato(String categoria, String data, String valor, String endereco, Usuario contratante, Usuario contratado, String hora) {
         this.categoria = categoria;
         this.data = data;
         this.valor = valor;
         this.endereco = endereco;
         this.contratante = contratante;
         this.contratado = contratado;
+        this.hora = hora;
     }
 
     public Contrato(Integer idContrato, String categoria, String endereco, String data, String hora, String valor, String feedback, String isAcepted, String wasPerformed, Integer avaliacao, Usuario contratante, Usuario contratado) {

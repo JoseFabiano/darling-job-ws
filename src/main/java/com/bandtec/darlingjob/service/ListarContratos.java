@@ -25,4 +25,15 @@ public class ListarContratos {
                 .collect(Collectors.toList());
     }
 
+    public List<ContratoResponseDTO> executeContratante(String idUsuario){
+
+        List<Contrato> teste = contratoRepository.findByContratante_IdUsuario(Integer.valueOf(idUsuario));
+
+        return contratoRepository.findByContratante_IdUsuario(Integer.valueOf(idUsuario))
+                .stream()
+                .map(ContratoResponseDTO::convertFromDomain)
+                .collect(Collectors.toList());
+    }
+
+
 }

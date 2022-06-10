@@ -32,7 +32,8 @@ public class CriarContrato {
                         criarContratoRequestDTO.getValor(),
                         criarContratoRequestDTO.getEndereco(),
                         contratante.get(),
-                        profissional.get()
+                        profissional.get(),
+                        criarContratoRequestDTO.getHora()
                 ));
 
         return ContratoCriadoResponseDTO.convertFromDomain(contratoCriado);
